@@ -1,45 +1,59 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="th">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday Museum</title>
-    <!-- เชื่อมโยงไฟล์ CSS -->
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
     <div class="app-container">
-      <!-- หน้าแรก: ตั๋วเข้างาน -->
-      <div id="page1" class="page active">
-        <div class="ticket-wrapper" onclick="goToPage(2)">
-          <div class="ticket">
-            <div class="ticket-inner">
-              <p>For you only</p>
-              <h2>Museum<br />Ticket</h2>
-              <p>15.09.2009</p>
+        
+        <!-- หน้าแรก: ตั๋วเข้างาน -->
+        <div id="page1" class="page active">
+            <div class="ticket-wrapper" onclick="openTicket()">
+                <div class="ticket-container">
+                    <!-- ตั๋วซีกซ้าย -->
+                    <div class="ticket ticket-left">
+                        <div class="ticket-inner">
+                            <p>For you only</p>
+                            <h2>Museum<br>Ticket</h2>
+                            <p>15.09.2009</p>
+                        </div>
+                    </div>
+                    <!-- ตั๋วซีกขวา -->
+                    <div class="ticket ticket-right">
+                        <div class="ticket-inner">
+                            <p>For you only</p>
+                            <h2>Museum<br>Ticket</h2>
+                            <p>15.09.2009</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="click-hint">Click Ticket to Enter</div>
             </div>
-          </div>
         </div>
-        <div class="click-hint">Click Ticket to Enter</div>
-      </div>
 
-      <!-- หน้าที่สอง: แกลลอรี่เลื่อนซ้ายขวา -->
-      <div id="page2" class="page">
-        <div class="gallery-container" id="gallery">
-          <!-- ข้อมูลจะถูกสร้างด้วย JavaScript -->
+        <!-- หน้าที่สอง: แกลลอรี่เลื่อนซ้ายขวา -->
+        <div id="page2" class="page">
+            <div class="gallery-container" id="gallery">
+                <!-- ข้อมูลจะถูกสร้างด้วย JavaScript เมื่อเข้ามาหน้านี้ -->
+            </div>
         </div>
-      </div>
 
-      <!-- หน้าที่สาม: รวมรูปหัวใจ -->
-      <div id="page3" class="page">
-        <div class="heart-collage" id="heart-collage">
-          <!-- รูปจะถูกจัดเรียงด้วย JavaScript -->
+        <!-- หน้าที่สาม: รวมรูปหัวใจ -->
+        <div id="page3" class="page">
+            <div class="heart-collage" id="heart-collage">
+                <!-- รูปจะถูกจัดเรียงด้วย JavaScript เมื่อเข้ามาหน้านี้ -->
+            </div>
+            <div class="hbd-text" id="hbd-text">
+                Happy Birthday<br>to<br>YOU
+            </div>
         </div>
-        <div class="hbd-text">Happy Birthday<br />to<br />YOU</div>
-      </div>
+
     </div>
 
-    <!-- เชื่อมโยงไฟล์ JavaScript -->
     <script src="script.js"></script>
-  </body>
+</body>
 </html>

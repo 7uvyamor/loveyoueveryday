@@ -19,6 +19,7 @@ body {
     align-items: center;
     min-height: 100vh;
     overflow: hidden;
+    user-select: none; /* ป้องกันการคลุมดำข้อความเวลาลาก */
 }
 
 .app-container {
@@ -40,7 +41,7 @@ body {
     height: 100%;
     display: flex;
     flex-direction: column;
-    transition: transform 0.5s ease-in-out, opacity 0.5s ease;
+    transition: opacity 0.5s ease;
     opacity: 0;
     pointer-events: none;
     z-index: 1;
@@ -97,6 +98,7 @@ body {
     transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
 }
 
+/* รอยหยักแบบฟันปลาที่แนบสนิทกัน */
 .ticket-left {
     clip-path: polygon(0 0, 50% 0, 48% 10%, 52% 20%, 48% 30%, 52% 40%, 48% 50%, 52% 60%, 48% 70%, 52% 80%, 48% 90%, 50% 100%, 0 100%);
 }
@@ -126,6 +128,7 @@ body {
     transition: opacity 0.3s;
 }
 
+/* อนิเมชันแยกตั๋ว */
 .ticket-wrapper.tearing .ticket-left {
     transform: translateX(-150px) rotate(-15deg) translateY(-20px);
     opacity: 0;
@@ -147,6 +150,7 @@ body {
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
     cursor: grab;
 }
 .gallery-container:active {
@@ -165,10 +169,8 @@ body {
     align-items: center;
     padding: 20px;
     position: relative;
-    user-select: none;
 }
 
-/* เพิ่มอนิเมชันเด้งเข้ามาให้แต่ละหน้าแกลลอรี่ */
 @keyframes fadeUp {
     0% { opacity: 0; transform: translateY(30px); }
     100% { opacity: 1; transform: translateY(0); }
@@ -178,11 +180,7 @@ body {
     opacity: 0;
     animation: fadeUp 0.6s ease forwards;
 }
-
-/* หน่วงเวลาให้ข้อความมาทีหลังรูปนิดนึง */
-.gallery-item .text-box {
-    animation-delay: 0.3s;
-}
+.gallery-item .text-box { animation-delay: 0.3s; }
 
 .img-box {
     width: 280px;
@@ -193,13 +191,14 @@ body {
     align-items: center;
     margin-bottom: 20px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    pointer-events: none;
+    pointer-events: none; /* ป้องกันการลากรูปติดมือ */
 }
 
 .img-box img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    pointer-events: none;
 }
 
 .text-box {
@@ -233,7 +232,7 @@ body {
     cursor: pointer;
     margin-top: 20px;
     opacity: 0;
-    animation: fadeUp 0.6s ease 0.5s forwards; /* ดีเลย์ปุ่ม */
+    animation: fadeUp 0.6s ease 0.5s forwards;
     transition: background-color 0.3s, transform 0.2s;
 }
 .finish-btn:hover { background-color: #555; transform: scale(1.05); }
@@ -252,7 +251,6 @@ body {
     margin-bottom: 40px;
 }
 
-/* อนิเมชันรูปลอยลงมาซ้อนเป็นหัวใจ */
 @keyframes dropIn {
     0% { transform: translateY(-50px) scale(0.5) rotate(var(--rot)); opacity: 0; }
     100% { transform: translateY(0) scale(1) rotate(var(--rot)); opacity: 1; }
@@ -265,10 +263,10 @@ body {
     background-color: #ddd;
     border: 3px solid white;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    object-fit: cover;
-    opacity: 0; /* ซ่อนไว้ก่อนเพื่อรอจังหวะหน่วงเวลา */
+    opacity: 0; 
     animation: dropIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     transition: transform 0.3s, z-index 0.3s;
+    pointer-events: auto; /* ให้ Hover ได้ */
 }
 
 .collage-img:hover {
@@ -282,5 +280,9 @@ body {
     color: var(--text-color);
     line-height: 1.4;
     opacity: 0;
+}
+
+/* ให้ข้อความ HBD โผล่มาด้วยการ Add Class ผ่าน JS จะได้ควบคุมเวลาได้เป๊ะ */
+.hbd-text.show {
     animation: fadeUp 0.8s ease forwards;
 }
