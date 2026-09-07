@@ -1,8 +1,3 @@
-// ==========================================
-// 1. ตั้งค่าข้อมูลรูปภาพและข้อความที่นี่
-// สามารถเปลี่ยน URL รูป และ ข้อความ ได้ตามต้องการ
-// หากรูปอยู่โฟลเดอร์เดียวกัน ให้ใส่ชื่อไฟล์ได้เลย เช่น image: "pic1.jpg"
-// ==========================================
 const galleryData = [
     {
         image: "https://images.unsplash.com/photo-1557800636-894a64c1696f?auto=format&fit=crop&w=300&q=80",
@@ -26,19 +21,28 @@ const galleryData = [
     }
 ];
 
-// ==========================================
-// 2. ระบบนำทางระหว่างหน้า (Navigation)
-// ==========================================
 function goToPage(pageNum) {
     document.querySelectorAll('.page').forEach(page => {
         page.classList.remove('active');
     });
-    document.getElementById('page' + pageNum).classList.add('active');
+    const targetPage = document.getElementById('page' + pageNum);
+    targetPage.classList.add('active');
+
+    // ทริกเกอร์ให้แอนิเมชันทำงานใหม่เมื่อเปิดหน้า 3
+    if (pageNum === 3) {
+        initHeartCollage();
+    }
 }
 
-// ==========================================
-// 3. สร้างหน้าที่ 2 (Museum Gallery)
-// ==========================================
+function openTicket() {
+    const wrapper = document.querySelector('.ticket-wrapper');
+    wrapper.classList.add('tearing');
+    
+    setTimeout(() => {
+        goToPage(2);
+    }, 700);
+}
+
 function initGallery() {
     const galleryElement = document.getElementById('gallery');
     
@@ -46,53 +50,67 @@ function initGallery() {
         const slide = document.createElement('div');
         slide.className = 'gallery-item';
         
+        const swipeText = index === galleryData.length - 1 ? "swipe 👉" : "swipe 👉";
+
         slide.innerHTML = `
-            <div class="img-box">
+            <div class="img-box" style="animation-delay: 0.2s">
                 <img src="${item.image}" alt="Pic ${index + 1}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'280\\' height=\\'280\\'><rect width=\\'280\\' height=\\'280\\' fill=\\'%23ccc\\'/><text x=\\'50%\\' y=\\'50%\\' dominant-baseline=\\'middle\\' text-anchor=\\'middle\\' font-size=\\'20\\'>Pic</text></svg>'">
             </div>
-            <div class="text-box">${item.text}</div>
-            <div class="swipe-hint">swipe 👉</div>
+            <div class="text-box" style="animation-delay: 0.4s">${item.text}</div>
+            <div class="swipe-hint">${swipeText}</div>
         `;
         galleryElement.appendChild(slide);
     });
 
-    // เพิ่มหน้าสุดท้ายใน Gallery เพื่อเป็นปุ่มกดไปหน้า 3
     const lastSlide = document.createElement('div');
     lastSlide.className = 'gallery-item';
     lastSlide.innerHTML = `
-        <div class="text-box" style="font-size: 24px;">ความทรงจำทั้งหมด...</div>
+        <div class="text-box" style="font-size: 24px; animation-delay: 0.2s;">ความทรงจำทั้งหมด...</div>
         <button class="finish-btn" onclick="goToPage(3)">เปิดดูของขวัญ</button>
     `;
     galleryElement.appendChild(lastSlide);
+
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    galleryElement.addEventListener('mousedown', (e) => {
+        isDown = true;
+        startX = e.pageX - galleryElement.offsetLeft;
+        scrollLeft = galleryElement.scrollLeft;
+    });
+    galleryElement.addEventListener('mouseleave', () => { isDown = false; });
+    galleryElement.addEventListener('mouseup', () => { isDown = false; });
+    galleryElement.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - galleryElement.offsetLeft;
+        const walk = (x - startX) * 2; 
+        galleryElement.scrollLeft = scrollLeft - walk;
+    });
 }
 
-// ==========================================
-// 4. สร้างหน้าที่ 3 (รูปหัวใจ)
-// ==========================================
 function initHeartCollage() {
     const heartContainer = document.getElementById('heart-collage');
+    heartContainer.innerHTML = ''; // เคลียร์รูปเก่าทิ้งก่อนสร้างใหม่เพื่อรันแอนิเมชันใหม่
     
-    // ตำแหน่ง X, Y และองศาการหมุน เพื่อจำลองโครงสร้างรูปหัวใจ (ตำแหน่งโดยประมาณ)
     const positions = [
-        { top: '30%', left: '15%', rot: -15 }, // ซ้ายบน
-        { top: '30%', left: '55%', rot: 15 },  // ขวาบน
-        { top: '15%', left: '35%', rot: 0 },   // ตรงกลางร่องหัวใจ
-        { top: '55%', left: '20%', rot: -5 },  // ซ้ายล่าง
-        { top: '55%', left: '50%', rot: 5 },   // ขวาล่าง
-        { top: '75%', left: '35%', rot: 0 }    // ล่างสุด
+        { top: '30%', left: '15%', rot: -15 }, 
+        { top: '30%', left: '55%', rot: 15 },  
+        { top: '15%', left: '35%', rot: 0 },   
+        { top: '55%', left: '20%', rot: -5 },  
+        { top: '55%', left: '50%', rot: 5 },   
+        { top: '75%', left: '35%', rot: 0 }    
     ];
 
     galleryData.forEach((item, index) => {
         const img = document.createElement('img');
         img.src = item.image;
         img.className = 'collage-img';
-        
-        // หากรูปภาพโหลดไม่ได้ ให้ใช้รูปกล่องเทาแทน
         img.onerror = function() {
             this.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><rect width='80' height='80' fill='%23ccc'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='14'>Pic</text></svg>";
         };
 
-        // นำตำแหน่งจาก Array มาใช้ ถ้ามีรูปเยอะกว่าตำแหน่งที่เตรียมไว้ ให้สุ่มตำแหน่งตรงกลางๆ
         let pos;
         if (index < positions.length) {
             pos = positions[index];
@@ -106,15 +124,23 @@ function initHeartCollage() {
 
         img.style.top = pos.top;
         img.style.left = pos.left;
-        img.style.transform = `rotate(${pos.rot}deg)`;
-        img.style.zIndex = index; // จัดลำดับการซ้อนทับ
+        
+        // ส่งค่าองศาไปให้ CSS เพื่อให้มันหมุนไปตามตำแหน่งเมื่อเด้งลงมา
+        img.style.setProperty('--rot', `${pos.rot}deg`); 
+        
+        // ตั้งค่าการหน่วงเวลาให้โผล่มาทีละ 0.2 วินาที (รูปแรกเริ่มโผล่ที่ 0.3s)
+        img.style.animationDelay = `${0.3 + (index * 0.2)}s`; 
+        
+        img.style.zIndex = index;
 
         heartContainer.appendChild(img);
     });
+
+    // ดีเลย์ข้อความ HBD ให้ขึ้นมาหลังจากรูปโผล่ครบแล้ว
+    const hbdText = document.querySelector('.hbd-text');
+    hbdText.style.animationDelay = `${0.3 + (galleryData.length * 0.2)}s`;
 }
 
-// เริ่มต้นการทำงานเมื่อโหลดหน้าเสร็จ
 window.onload = () => {
     initGallery();
-    initHeartCollage();
 };

@@ -21,7 +21,6 @@ body {
     overflow: hidden;
 }
 
-/* Container จำลองหน้าจอมือถือ */
 .app-container {
     width: 100%;
     max-width: 400px;
@@ -62,31 +61,48 @@ body {
 .ticket-wrapper {
     cursor: pointer;
     text-align: center;
-    transition: transform 0.2s;
 }
 
-.ticket-wrapper:hover {
-    transform: scale(1.05);
+.ticket-container {
+    position: relative;
+    width: 280px;
+    height: 120px;
+    margin: 0 auto;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.ticket-wrapper:hover .ticket-container {
+    transform: scale(1.08);
 }
 
 .ticket {
     background-color: var(--ticket-blue);
-    width: 280px;
-    height: 120px;
-    position: relative;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 10px;
     color: white;
     border-radius: 5px;
-    /* สร้างรอยหยักด้านข้าง */
     mask-image: radial-gradient(circle at 0px 10px, transparent 10px, black 11px);
     mask-size: 100% 20px;
     -webkit-mask-image: radial-gradient(circle at 0px 10px, transparent 5px, black 6px), radial-gradient(circle at 100% 10px, transparent 5px, black 6px);
     -webkit-mask-size: 51% 20px;
     -webkit-mask-repeat: repeat-y;
     -webkit-mask-position: left, right;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+}
+
+.ticket-left {
+    clip-path: polygon(0 0, 50% 0, 48% 10%, 52% 20%, 48% 30%, 52% 40%, 48% 50%, 52% 60%, 48% 70%, 52% 80%, 48% 90%, 50% 100%, 0 100%);
+}
+
+.ticket-right {
+    clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%, 48% 90%, 52% 80%, 48% 70%, 52% 60%, 48% 50%, 52% 40%, 48% 30%, 52% 20%, 48% 10%);
 }
 
 .ticket-inner {
@@ -99,9 +115,28 @@ body {
     align-items: center;
 }
 
-.ticket h2 { font-size: 24px; font-weight: bold; margin: 5px 0; }
+.ticket h2 { font-size: 24px; font-weight: bold; margin: 5px 0; line-height: 1.1; }
 .ticket p { font-size: 10px; }
-.click-hint { margin-top: 20px; font-size: 12px; text-decoration: underline; color: #555; }
+
+.click-hint { 
+    margin-top: 20px; 
+    font-size: 12px; 
+    text-decoration: underline; 
+    color: #555; 
+    transition: opacity 0.3s;
+}
+
+.ticket-wrapper.tearing .ticket-left {
+    transform: translateX(-150px) rotate(-15deg) translateY(-20px);
+    opacity: 0;
+}
+.ticket-wrapper.tearing .ticket-right {
+    transform: translateX(150px) rotate(15deg) translateY(20px);
+    opacity: 0;
+}
+.ticket-wrapper.tearing .click-hint {
+    opacity: 0;
+}
 
 /* --- Page 2: Museum Gallery --- */
 .gallery-container {
@@ -112,9 +147,11 @@ body {
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
+    cursor: grab;
 }
-
-/* ซ่อน Scrollbar */
+.gallery-container:active {
+    cursor: grabbing;
+}
 .gallery-container::-webkit-scrollbar { display: none; }
 .gallery-container { -ms-overflow-style: none; scrollbar-width: none; }
 
@@ -128,6 +165,23 @@ body {
     align-items: center;
     padding: 20px;
     position: relative;
+    user-select: none;
+}
+
+/* เพิ่มอนิเมชันเด้งเข้ามาให้แต่ละหน้าแกลลอรี่ */
+@keyframes fadeUp {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.gallery-item .img-box, .gallery-item .text-box {
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+}
+
+/* หน่วงเวลาให้ข้อความมาทีหลังรูปนิดนึง */
+.gallery-item .text-box {
+    animation-delay: 0.3s;
 }
 
 .img-box {
@@ -139,6 +193,7 @@ body {
     align-items: center;
     margin-bottom: 20px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    pointer-events: none;
 }
 
 .img-box img {
@@ -160,9 +215,14 @@ body {
     font-size: 12px;
     color: #888;
     letter-spacing: 2px;
+    animation: bounceRight 1.5s infinite;
 }
 
-/* ปุ่มไปหน้าสุดท้าย */
+@keyframes bounceRight {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(5px); }
+}
+
 .finish-btn {
     background-color: #333;
     color: white;
@@ -172,7 +232,11 @@ body {
     font-size: 16px;
     cursor: pointer;
     margin-top: 20px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.5s forwards; /* ดีเลย์ปุ่ม */
+    transition: background-color 0.3s, transform 0.2s;
 }
+.finish-btn:hover { background-color: #555; transform: scale(1.05); }
 
 /* --- Page 3: All Pic & Heart --- */
 #page3 {
@@ -188,6 +252,12 @@ body {
     margin-bottom: 40px;
 }
 
+/* อนิเมชันรูปลอยลงมาซ้อนเป็นหัวใจ */
+@keyframes dropIn {
+    0% { transform: translateY(-50px) scale(0.5) rotate(var(--rot)); opacity: 0; }
+    100% { transform: translateY(0) scale(1) rotate(var(--rot)); opacity: 1; }
+}
+
 .collage-img {
     position: absolute;
     width: 80px;
@@ -196,12 +266,14 @@ body {
     border: 3px solid white;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     object-fit: cover;
-    transition: transform 0.3s;
+    opacity: 0; /* ซ่อนไว้ก่อนเพื่อรอจังหวะหน่วงเวลา */
+    animation: dropIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    transition: transform 0.3s, z-index 0.3s;
 }
 
 .collage-img:hover {
     z-index: 100 !important;
-    transform: scale(1.5) !important;
+    transform: scale(1.5) rotate(0deg) !important;
 }
 
 .hbd-text {
@@ -209,4 +281,6 @@ body {
     font-size: 24px;
     color: var(--text-color);
     line-height: 1.4;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards;
 }
