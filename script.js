@@ -76,6 +76,7 @@ function initGallery() {
     `;
     galleryElement.appendChild(lastSlide);
 
+    // ผูกระบบลาก (Drag) บนคอมพิวเตอร์ครั้งเดียวเพื่อไม่ให้กินทรัพยากร
     if (!hasAttachedDragEvent) {
         galleryElement.addEventListener('mousedown', (e) => {
             isDown = true;
@@ -102,6 +103,7 @@ function initHeartCollage() {
     const hbdText = document.getElementById('hbd-text');
     hbdText.classList.remove('show');
     
+    // โครงสร้างหลักรูปหัวใจ
     const positions = [
         { top: '30%', left: '15%', rot: -15 }, 
         { top: '30%', left: '55%', rot: 15 },  
@@ -131,7 +133,6 @@ function initHeartCollage() {
         
         const delay = 0.3 + (index * 0.2);
         img.style.animationDelay = `${delay}s`; 
-        
         img.style.zIndex = index;
 
         heartContainer.appendChild(img);
