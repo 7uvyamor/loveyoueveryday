@@ -1,0 +1,212 @@
+:root {
+    --bg-dark: #222222;
+    --bg-yellow: #fae39d;
+    --ticket-blue: #1c9db9;
+    --text-color: #333;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* Container จำลองหน้าจอมือถือ */
+.app-container {
+    width: 100%;
+    max-width: 400px;
+    height: 100vh;
+    max-height: 800px;
+    background-color: var(--bg-yellow);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.page.active {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 10;
+}
+
+/* --- Page 1: Ticket Page --- */
+#page1 {
+    justify-content: center;
+    align-items: center;
+}
+
+.ticket-wrapper {
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.ticket-wrapper:hover {
+    transform: scale(1.05);
+}
+
+.ticket {
+    background-color: var(--ticket-blue);
+    width: 280px;
+    height: 120px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    color: white;
+    border-radius: 5px;
+    /* สร้างรอยหยักด้านข้าง */
+    mask-image: radial-gradient(circle at 0px 10px, transparent 10px, black 11px);
+    mask-size: 100% 20px;
+    -webkit-mask-image: radial-gradient(circle at 0px 10px, transparent 5px, black 6px), radial-gradient(circle at 100% 10px, transparent 5px, black 6px);
+    -webkit-mask-size: 51% 20px;
+    -webkit-mask-repeat: repeat-y;
+    -webkit-mask-position: left, right;
+}
+
+.ticket-inner {
+    border: 2px dashed rgba(255,255,255,0.5);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.ticket h2 { font-size: 24px; font-weight: bold; margin: 5px 0; }
+.ticket p { font-size: 10px; }
+.click-hint { margin-top: 20px; font-size: 12px; text-decoration: underline; color: #555; }
+
+/* --- Page 2: Museum Gallery --- */
+.gallery-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+}
+
+/* ซ่อน Scrollbar */
+.gallery-container::-webkit-scrollbar { display: none; }
+.gallery-container { -ms-overflow-style: none; scrollbar-width: none; }
+
+.gallery-item {
+    min-width: 100%;
+    height: 100%;
+    scroll-snap-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+}
+
+.img-box {
+    width: 280px;
+    height: 280px;
+    background-color: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.text-box {
+    font-size: 18px;
+    color: var(--text-color);
+    text-align: center;
+    min-height: 50px;
+}
+
+.swipe-hint {
+    position: absolute;
+    bottom: 50px;
+    font-size: 12px;
+    color: #888;
+    letter-spacing: 2px;
+}
+
+/* ปุ่มไปหน้าสุดท้าย */
+.finish-btn {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+/* --- Page 3: All Pic & Heart --- */
+#page3 {
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.heart-collage {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.collage-img {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background-color: #ddd;
+    border: 3px solid white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.collage-img:hover {
+    z-index: 100 !important;
+    transform: scale(1.5) !important;
+}
+
+.hbd-text {
+    text-align: center;
+    font-size: 24px;
+    color: var(--text-color);
+    line-height: 1.4;
+}
