@@ -27,7 +27,6 @@ function goToPage(pageNum) {
     });
     document.getElementById('page' + pageNum).classList.add('active');
 
-    // ทริกเกอร์การสร้างหน้าใหม่ เพื่อให้แอนิเมชันเริ่มเล่นตรงจังหวะพอดี
     if (pageNum === 2) {
         initGallery();
     } else if (pageNum === 3) {
@@ -35,10 +34,9 @@ function goToPage(pageNum) {
     }
 }
 
-// กดตั๋ว -> เล่นอนิเมชันฉีก -> รอ 0.7วิ แล้วไปหน้าที่ 2
 function openTicket() {
     const wrapper = document.querySelector('.ticket-wrapper');
-    if (wrapper.classList.contains('tearing')) return; // กันกดซ้ำ
+    if (wrapper.classList.contains('tearing')) return; 
     
     wrapper.classList.add('tearing');
     
@@ -47,7 +45,6 @@ function openTicket() {
     }, 700);
 }
 
-// ระบบเลื่อนบนคอมพิวเตอร์ (Drag to scroll)
 let isDown = false;
 let startX;
 let scrollLeft;
@@ -55,7 +52,7 @@ let hasAttachedDragEvent = false;
 
 function initGallery() {
     const galleryElement = document.getElementById('gallery');
-    galleryElement.innerHTML = ''; // เคลียร์ของเก่าทิ้ง (เผื่อกรณีมีการย้อนกลับ)
+    galleryElement.innerHTML = ''; 
     
     galleryData.forEach((item, index) => {
         const slide = document.createElement('div');
@@ -71,7 +68,6 @@ function initGallery() {
         galleryElement.appendChild(slide);
     });
 
-    // หน้าสุดท้ายของแกลลอรี่ เป็นปุ่มไปต่อ
     const lastSlide = document.createElement('div');
     lastSlide.className = 'gallery-item';
     lastSlide.innerHTML = `
@@ -80,7 +76,6 @@ function initGallery() {
     `;
     galleryElement.appendChild(lastSlide);
 
-    // ผูก Event การลากเมาส์ (ทำแค่ครั้งเดียว)
     if (!hasAttachedDragEvent) {
         galleryElement.addEventListener('mousedown', (e) => {
             isDown = true;
@@ -93,7 +88,7 @@ function initGallery() {
             if (!isDown) return;
             e.preventDefault();
             const x = e.pageX - galleryElement.offsetLeft;
-            const walk = (x - startX) * 2; // ปรับเลข 2 เพื่อความเร็วในการลาก
+            const walk = (x - startX) * 2; 
             galleryElement.scrollLeft = scrollLeft - walk;
         });
         hasAttachedDragEvent = true;
@@ -104,11 +99,9 @@ function initHeartCollage() {
     const heartContainer = document.getElementById('heart-collage');
     heartContainer.innerHTML = ''; 
     
-    // ซ่อนข้อความไว้ก่อน เพื่อรอจังหวะหน่วงเวลา
     const hbdText = document.getElementById('hbd-text');
     hbdText.classList.remove('show');
     
-    // โครงสร้างรูปหัวใจ (ตำแหน่งโดยประมาณ)
     const positions = [
         { top: '30%', left: '15%', rot: -15 }, 
         { top: '30%', left: '55%', rot: 15 },  
@@ -126,7 +119,6 @@ function initHeartCollage() {
             this.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><rect width='80' height='80' fill='%23ccc'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='14'>Pic</text></svg>";
         };
 
-        // จับคู่ตำแหน่ง ถ้ามีรูปเยอะกว่าตำแหน่งที่กำหนดไว้ ให้สุ่ม
         let pos = (index < positions.length) ? positions[index] : {
             top: (30 + Math.random() * 30) + '%',
             left: (30 + Math.random() * 30) + '%',
@@ -135,11 +127,8 @@ function initHeartCollage() {
 
         img.style.top = pos.top;
         img.style.left = pos.left;
-        
-        // ส่งตัวแปร --rot เข้าไปใน CSS อนิเมชัน
         img.style.setProperty('--rot', `${pos.rot}deg`); 
         
-        // รูปแรกเริ่มที่ 0.3s แล้วบวกเพิ่มทีละ 0.2s ไปเรื่อยๆ
         const delay = 0.3 + (index * 0.2);
         img.style.animationDelay = `${delay}s`; 
         
@@ -148,11 +137,9 @@ function initHeartCollage() {
         heartContainer.appendChild(img);
     });
 
-    // สั่งให้ข้อความ HBD ปรากฏขึ้นหลังจากรูปล่าสุดโผล่มาแล้ว
-    const textDelay = 0.3 + (galleryData.length * 0.2) + 0.3; // บวกเผื่ออีกนิดนึง
+    const textDelay = 0.3 + (galleryData.length * 0.2) + 0.3; 
     hbdText.style.animationDelay = `${textDelay}s`;
     
-    // กระตุ้นให้เกิด Reflow เพื่อให้แอนิเมชันเริ่มใหม่
     void hbdText.offsetWidth; 
     hbdText.classList.add('show');
 }
