@@ -1,67 +1,100 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="th">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Happy Birthday Museum</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <div class="app-container">
-        
-        <!-- ของตกแต่งพื้นหลังธีมทะเล (จะแสดงในทุกหน้า) -->
-        <div class="sea-decorations">
-            <div class="decor" style="top: 10%; left: 10%; animation-delay: 0s; font-size: 30px;">🪼</div>
-            <div class="decor" style="top: 15%; right: 15%; animation-delay: 1s; font-size: 24px;">🐚</div>
-            <div class="decor" style="bottom: 15%; left: 20%; animation-delay: 2s; font-size: 26px;">🐠</div>
-            <div class="decor" style="bottom: 30%; right: 10%; animation-delay: 0.5s; font-size: 32px;">🪼</div>
-            <div class="decor" style="top: 45%; left: 5%; animation-delay: 1.5s; font-size: 20px;">🫧</div>
-            <div class="decor" style="top: 55%; right: 8%; animation-delay: 2.5s; font-size: 22px;">🫧</div>
+      <!-- ของตกแต่งพื้นหลังธีมทะเล (จะแสดงในทุกหน้า) -->
+      <div class="sea-decorations">
+        <div
+          class="decor"
+          style="top: 10%; left: 10%; animation-delay: 0s; font-size: 30px"
+        >
+          🪼
         </div>
-
-        <!-- หน้าแรก: ตั๋วเข้างาน -->
-        <div id="page1" class="page active">
-            <div class="ticket-wrapper" onclick="openTicket()">
-                <div class="ticket-container">
-                    <div class="ticket ticket-left">
-                        <div class="ticket-inner">
-                            <p>For you only</p>
-                            <h2>Museum<br>Ticket</h2>
-                            <p>15.09.2009</p>
-                        </div>
-                    </div>
-                    <div class="ticket ticket-right">
-                        <div class="ticket-inner">
-                            <p>For you only</p>
-                            <h2>Museum<br>Ticket</h2>
-                            <p>15.09.2009</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="click-hint">Click Ticket to Enter</div>
-            </div>
+        <div
+          class="decor"
+          style="top: 15%; right: 15%; animation-delay: 1s; font-size: 24px"
+        >
+          🐚
         </div>
-
-        <!-- หน้าที่สอง: แกลลอรี่เลื่อนซ้ายขวา -->
-        <div id="page2" class="page">
-            <div class="gallery-container" id="gallery">
-                <!-- ข้อมูลจะถูกสร้างด้วย JavaScript -->
-            </div>
+        <div
+          class="decor"
+          style="bottom: 15%; left: 20%; animation-delay: 2s; font-size: 26px"
+        >
+          🐠
         </div>
-
-        <!-- หน้าที่สาม: รวมรูปหัวใจ -->
-        <div id="page3" class="page">
-            <div class="heart-collage" id="heart-collage">
-                <!-- รูปจะถูกจัดเรียงด้วย JavaScript -->
-            </div>
-            <div class="hbd-text" id="hbd-text">
-                Happy Birthday<br>to<br>YOU
-            </div>
+        <div
+          class="decor"
+          style="
+            bottom: 30%;
+            right: 10%;
+            animation-delay: 0.5s;
+            font-size: 32px;
+          "
+        >
+          🪼
         </div>
+        <div
+          class="decor"
+          style="top: 45%; left: 5%; animation-delay: 1.5s; font-size: 20px"
+        >
+          🫧
+        </div>
+        <div
+          class="decor"
+          style="top: 55%; right: 8%; animation-delay: 2.5s; font-size: 22px"
+        >
+          🫧
+        </div>
+      </div>
 
+      <!-- หน้าแรก: ตั๋วเข้างาน -->
+      <div id="page1" class="page active">
+        <div class="ticket-wrapper" onclick="openTicket()">
+          <div class="ticket-container">
+            <div class="ticket ticket-left">
+              <div class="ticket-inner">
+                <p>For you only</p>
+                <h2>Museum<br />Ticket</h2>
+                <p>15.09.2009</p>
+              </div>
+            </div>
+            <div class="ticket ticket-right">
+              <div class="ticket-inner">
+                <p>For you only</p>
+                <h2>Museum<br />Ticket</h2>
+                <p>15.09.2009</p>
+              </div>
+            </div>
+          </div>
+          <div class="click-hint">Click Ticket to Enter</div>
+        </div>
+      </div>
+
+      <!-- หน้าที่สอง: แกลลอรี่เลื่อนซ้ายขวา -->
+      <div id="page2" class="page">
+        <div class="gallery-container" id="gallery">
+          <!-- ข้อมูลจะถูกสร้างด้วย JavaScript -->
+        </div>
+      </div>
+
+      <!-- หน้าที่สาม: รวมรูปหัวใจ -->
+      <div id="page3" class="page">
+        <div class="heart-collage" id="heart-collage">
+          <!-- รูปจะถูกจัดเรียงด้วย JavaScript -->
+        </div>
+        <div class="hbd-text" id="hbd-text">
+          Happy Birthday<br />to<br />YOU
+        </div>
+      </div>
     </div>
 
     <script src="script.js"></script>
-</body>
+    <script src="data.js"></script>
+  </body>
 </html>

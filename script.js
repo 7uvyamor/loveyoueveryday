@@ -1,25 +1,3 @@
-const galleryData = [
-    {
-        image: "https://images.unsplash.com/photo-1557800636-894a64c1696f?auto=format&fit=crop&w=300&q=80",
-        text: "รูปที่ 1: วันแรกที่เราเจอกัน"
-    },
-    {
-        image: "https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=300&q=80",
-        text: "รูปที่ 2: รอยยิ้มที่น่ารักที่สุด"
-    },
-    {
-        image: "https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=300&q=80",
-        text: "รูปที่ 3: ไปเที่ยวด้วยกัน"
-    },
-    {
-        image: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=300&q=80",
-        text: "รูปที่ 4: ของขวัญชิ้นแรก"
-    },
-    {
-        image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80",
-        text: "รูปที่ 5: มีความสุขมากๆ นะ"
-    }
-];
 
 function goToPage(pageNum) {
     document.querySelectorAll('.page').forEach(page => {
