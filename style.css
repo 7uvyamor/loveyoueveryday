@@ -1,304 +1,379 @@
 :root {
-    --bg-dark: #222222;
-    --bg-yellow: #fae39d;
-    --ticket-blue: #1c9db9;
-    --text-color: #333;
+  --bg-dark: #222222;
+  --bg-yellow: #fae39d;
+  --ticket-blue: #1c9db9;
+  --text-color: #333;
 }
 
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-    background-color: var(--bg-dark);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    overflow: hidden;
-    user-select: none; 
+  background-color: var(--bg-dark);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;
+  user-select: none;
 }
 
 .app-container {
-    width: 100%;
-    max-width: 400px;
-    height: 100vh;
-    max-height: 800px;
-    background-color: var(--bg-yellow);
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  width: 100%;
+  max-width: 400px;
+  height: 100vh;
+  max-height: 800px;
+  background-color: var(--bg-yellow);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
 /* ของตกแต่งธีมทะเล */
 .sea-decorations {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none; /* ห้ามให้บังการคลิก */
-    z-index: 0; /* ให้อยู่ชั้นล่างสุด */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* ห้ามให้บังการคลิก */
+  z-index: 0; /* ให้อยู่ชั้นล่างสุด */
 }
 
 .decor {
-    position: absolute;
-    opacity: 0.6;
-    animation: floatDecor 4s ease-in-out infinite alternate;
+  position: absolute;
+  opacity: 0.6;
+  animation: floatDecor 4s ease-in-out infinite alternate;
 }
 
 @keyframes floatDecor {
-    0% { transform: translateY(0px) rotate(0deg); }
-    100% { transform: translateY(-15px) rotate(10deg); }
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-15px) rotate(10deg);
+  }
 }
 
 .page {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    transition: opacity 0.5s ease;
-    opacity: 0;
-    pointer-events: none;
-    z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: opacity 0.5s ease;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .page.active {
-    opacity: 1;
-    pointer-events: auto;
-    z-index: 10; /* เนื้อหาของหน้าต้องอยู่เหนือของตกแต่งเสมอ */
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 10; /* เนื้อหาของหน้าต้องอยู่เหนือของตกแต่งเสมอ */
 }
 
 /* --- Page 1: Ticket Page --- */
 #page1 {
-    justify-content: center;
-    align-items: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .ticket-wrapper {
-    cursor: pointer;
-    text-align: center;
+  cursor: pointer;
+  text-align: center;
 }
 
 .ticket-container {
-    position: relative;
-    width: 280px;
-    height: 120px;
-    margin: 0 auto;
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  width: 280px;
+  height: 120px;
+  margin: 0 auto;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .ticket-wrapper:hover .ticket-container {
-    transform: scale(1.08);
+  transform: scale(1.08);
 }
 
 .ticket {
-    background-color: var(--ticket-blue);
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    color: white;
-    border-radius: 5px;
-    mask-image: radial-gradient(circle at 0px 10px, transparent 10px, black 11px);
-    mask-size: 100% 20px;
-    -webkit-mask-image: radial-gradient(circle at 0px 10px, transparent 5px, black 6px), radial-gradient(circle at 100% 10px, transparent 5px, black 6px);
-    -webkit-mask-size: 51% 20px;
-    -webkit-mask-repeat: repeat-y;
-    -webkit-mask-position: left, right;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+  background-color: var(--ticket-blue);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  color: white;
+  border-radius: 5px;
+  mask-image: radial-gradient(circle at 0px 10px, transparent 10px, black 11px);
+  mask-size: 100% 20px;
+  -webkit-mask-image:
+    radial-gradient(circle at 0px 10px, transparent 5px, black 6px),
+    radial-gradient(circle at 100% 10px, transparent 5px, black 6px);
+  -webkit-mask-size: 51% 20px;
+  -webkit-mask-repeat: repeat-y;
+  -webkit-mask-position: left, right;
+  transition:
+    transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.5s ease;
 }
 
 .ticket-left {
-    clip-path: polygon(0 0, 50% 0, 48% 10%, 52% 20%, 48% 30%, 52% 40%, 48% 50%, 52% 60%, 48% 70%, 52% 80%, 48% 90%, 50% 100%, 0 100%);
+  clip-path: polygon(
+    0 0,
+    50% 0,
+    48% 10%,
+    52% 20%,
+    48% 30%,
+    52% 40%,
+    48% 50%,
+    52% 60%,
+    48% 70%,
+    52% 80%,
+    48% 90%,
+    50% 100%,
+    0 100%
+  );
 }
 
 .ticket-right {
-    clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%, 48% 90%, 52% 80%, 48% 70%, 52% 60%, 48% 50%, 52% 40%, 48% 30%, 52% 20%, 48% 10%);
+  clip-path: polygon(
+    50% 0,
+    100% 0,
+    100% 100%,
+    50% 100%,
+    48% 90%,
+    52% 80%,
+    48% 70%,
+    52% 60%,
+    48% 50%,
+    52% 40%,
+    48% 30%,
+    52% 20%,
+    48% 10%
+  );
 }
 
 .ticket-inner {
-    border: 2px dashed rgba(255,255,255,0.5);
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  border: 2px dashed rgba(255, 255, 255, 0.5);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.ticket h2 { font-size: 24px; font-weight: bold; margin: 5px 0; line-height: 1.1; }
-.ticket p { font-size: 10px; }
+.ticket h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 5px 0;
+  line-height: 1.1;
+}
+.ticket p {
+  font-size: 10px;
+}
 
-.click-hint { 
-    margin-top: 20px; 
-    font-size: 12px; 
-    text-decoration: underline; 
-    color: #555; 
-    transition: opacity 0.3s;
+.click-hint {
+  margin-top: 20px;
+  font-size: 12px;
+  text-decoration: underline;
+  color: #555;
+  transition: opacity 0.3s;
 }
 
 .ticket-wrapper.tearing .ticket-left {
-    transform: translateX(-150px) rotate(-15deg) translateY(-20px);
-    opacity: 0;
+  transform: translateX(-150px) rotate(-15deg) translateY(-20px);
+  opacity: 0;
 }
 .ticket-wrapper.tearing .ticket-right {
-    transform: translateX(150px) rotate(15deg) translateY(20px);
-    opacity: 0;
+  transform: translateX(150px) rotate(15deg) translateY(20px);
+  opacity: 0;
 }
 .ticket-wrapper.tearing .click-hint {
-    opacity: 0;
+  opacity: 0;
 }
 
 /* --- Page 2: Museum Gallery --- */
 .gallery-container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    cursor: grab;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  cursor: grab;
 }
 .gallery-container:active {
-    cursor: grabbing;
+  cursor: grabbing;
 }
-.gallery-container::-webkit-scrollbar { display: none; }
-.gallery-container { -ms-overflow-style: none; scrollbar-width: none; }
+.gallery-container::-webkit-scrollbar {
+  display: none;
+}
+.gallery-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 
 .gallery-item {
-    min-width: 100%;
-    height: 100%;
-    scroll-snap-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    position: relative;
+  min-width: 100%;
+  height: 100%;
+  scroll-snap-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  position: relative;
 }
 
 @keyframes fadeUp {
-    0% { opacity: 0; transform: translateY(30px); }
-    100% { opacity: 1; transform: translateY(0); }
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.gallery-item .img-box, .gallery-item .text-box {
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards;
+.gallery-item .img-box,
+.gallery-item .text-box {
+  opacity: 0;
+  animation: fadeUp 0.6s ease forwards;
 }
-.gallery-item .text-box { animation-delay: 0.3s; }
+.gallery-item .text-box {
+  animation-delay: 0.3s;
+}
 
 .img-box {
-    width: 280px;
-    height: 280px;
-    background-color: #ddd;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    pointer-events: none; 
+  width: 280px;
+  height: 280px;
+  background-color: #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+  border-radius: 15px; /* เพิ่มขอบมนที่นี่ */
+  overflow: hidden; /* เพื่อให้รูปภาพด้านในถูกตัดตามขอบมน */
 }
 
 .img-box img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    pointer-events: none;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
 }
 
 .text-box {
-    font-size: 18px;
-    color: var(--text-color);
-    text-align: center;
-    min-height: 50px;
+  font-size: 18px;
+  color: var(--text-color);
+  text-align: center;
+  min-height: 50px;
 }
 
 .swipe-hint {
-    position: absolute;
-    bottom: 50px;
-    font-size: 12px;
-    color: #888;
-    letter-spacing: 2px;
-    animation: bounceRight 1.5s infinite;
+  position: absolute;
+  bottom: 50px;
+  font-size: 12px;
+  color: #888;
+  letter-spacing: 2px;
+  animation: bounceRight 1.5s infinite;
 }
 
 @keyframes bounceRight {
-    0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(5px); }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(5px);
+  }
 }
 
 .finish-btn {
-    background-color: #333;
-    color: white;
-    border: none;
-    padding: 15px 30px;
-    border-radius: 25px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 20px;
-    opacity: 0;
-    animation: fadeUp 0.6s ease 0.5s forwards;
-    transition: background-color 0.3s, transform 0.2s;
-    pointer-events: auto;
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+  opacity: 0;
+  animation: fadeUp 0.6s ease 0.5s forwards;
+  transition:
+    background-color 0.3s,
+    transform 0.2s;
+  pointer-events: auto;
 }
-.finish-btn:hover { background-color: #555; transform: scale(1.05); }
+.finish-btn:hover {
+  background-color: #555;
+  transform: scale(1.05);
+}
 
 /* --- Page 3: All Pic & Heart --- */
 #page3 {
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }
 
 .heart-collage {
-    width: 300px;
-    height: 300px;
-    position: relative;
-    margin-bottom: 40px;
-    z-index: 2; 
+  width: 300px;
+  height: 300px;
+  position: relative;
+  margin-bottom: 40px;
+  z-index: 2;
 }
 
 @keyframes dropIn {
-    0% { transform: translateY(-50px) scale(0.5) rotate(var(--rot)); opacity: 0; }
-    100% { transform: translateY(0) scale(1) rotate(var(--rot)); opacity: 1; }
+  0% {
+    transform: translateY(-50px) scale(0.5) rotate(var(--rot));
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0) scale(1) rotate(var(--rot));
+    opacity: 1;
+  }
 }
 
 .collage-img {
-    position: absolute;
-    width: 80px;
-    height: 80px;
-    background-color: #ddd;
-    border: 3px solid white;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    opacity: 0; 
-    animation: dropIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    /* เอา hover effect ออกตามที่ขอล่าสุดแล้ว */
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background-color: #ddd;
+  border: 3px solid white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  animation: dropIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  border-radius: 10px; /* เพิ่มขอบมนที่นี่ */
 }
 
 .hbd-text {
-    text-align: center;
-    font-size: 24px;
-    color: var(--text-color);
-    line-height: 1.4;
-    opacity: 0;
-    z-index: 2;
+  text-align: center;
+  font-size: 24px;
+  color: var(--text-color);
+  line-height: 1.4;
+  opacity: 0;
+  z-index: 2;
 }
 
 .hbd-text.show {
-    animation: fadeUp 0.8s ease forwards;
+  animation: fadeUp 0.8s ease forwards;
 }

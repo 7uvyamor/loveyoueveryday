@@ -5,19 +5,19 @@ const galleryData = [
     },
     {
         image: "Photo/Event_withyou.jpg", 
-        text: "ไปนั่งดูงานAIกับเธอ"
+        text: "อันนี้ไปนั่งดูงานAIกับเธอ"
     },
     {
         image: "Photo/PlaywithCat02.jpg",
-        text: "อันนี้ไปตลาดลับกัน"
+        text: "อันนี้เค้าหนีเพื่อนไปตลาดลับกับเธอ"
     },
     {
         image: "Photo/Flower_byYou.jpg",
-        text: "ดอกไม้ที่เธอให้ที่เซฟวัน<br>(ยังอยู่หัวเตียง)"
+        text: "ดอกไม้ที่เธอให้ที่เซฟวัน<br>(ยังอยู่หัวเตียงอยู่เลย)"
     },
     {
         image: "Photo/PlaywithCat01.jpg",
-        text: "เล่นกับแมวขี้อ้อนที่คปอ."
+        text: "เธอเล่นกับแมวขี้อ้อนที่คปอ."
     },
     {
         image: "Photo/UnianMall_withU.webp",
