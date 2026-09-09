@@ -53,7 +53,6 @@ function initGallery() {
     `;
     galleryElement.appendChild(lastSlide);
 
-    // ผูกระบบลาก (Drag) บนคอมพิวเตอร์
     if (!hasAttachedDragEvent) {
         galleryElement.addEventListener('mousedown', (e) => {
             isDown = true;
@@ -73,6 +72,8 @@ function initGallery() {
     }
 }
 
+let hasAttachedFinalDragEvent = false;
+
 function initHeartCollage() {
     const heartContainer = document.getElementById('heart-collage');
     heartContainer.innerHTML = ''; 
@@ -82,20 +83,20 @@ function initHeartCollage() {
     
     // พิกัดสำหรับ 14 รูป เพื่อให้เรียงออกมาเป็นรูปหัวใจพอดี
     const positions = [
-        { top: '5%', left: '16%', rot: -15 },   // 1. โค้งซ้ายบน
-        { top: '5%', left: '56%', rot: 15 },    // 2. โค้งขวาบน
-        { top: '15%', left: '36%', rot: 0 },    // 3. ร่องหัวใจตรงกลาง
-        { top: '22%', left: '2%', rot: -25 },   // 4. ขอบซ้ายบน
-        { top: '22%', left: '70%', rot: 25 },   // 5. ขอบขวาบน
-        { top: '35%', left: '18%', rot: -10 },  // 6. ด้านในซ้าย
-        { top: '35%', left: '54%', rot: 10 },   // 7. ด้านในขวา
-        { top: '40%', left: '36%', rot: 5 },    // 8. กลางใจ
-        { top: '45%', left: '7%', rot: -15 },   // 9. ขอบซ้ายล่าง
-        { top: '45%', left: '65%', rot: 15 },   // 10. ขอบขวาล่าง
-        { top: '58%', left: '22%', rot: -10 },  // 11. ล่างซ้าย
-        { top: '58%', left: '50%', rot: 10 },   // 12. ล่างขวา
-        { top: '65%', left: '36%', rot: -5 },   // 13. ตรงกลางก่อนถึงปลาย
-        { top: '78%', left: '36%', rot: 0 }     // 14. ปลายแหลมสุดด้านล่าง
+        { top: '5%', left: '16%', rot: -15 },   // 1
+        { top: '5%', left: '56%', rot: 15 },    // 2
+        { top: '15%', left: '36%', rot: 0 },    // 3
+        { top: '22%', left: '2%', rot: -25 },   // 4
+        { top: '22%', left: '70%', rot: 25 },   // 5
+        { top: '35%', left: '18%', rot: -10 },  // 6
+        { top: '35%', left: '54%', rot: 10 },   // 7
+        { top: '40%', left: '36%', rot: 5 },    // 8
+        { top: '45%', left: '7%', rot: -15 },   // 9
+        { top: '45%', left: '65%', rot: 15 },   // 10
+        { top: '58%', left: '22%', rot: -10 },  // 11
+        { top: '58%', left: '50%', rot: 10 },   // 12
+        { top: '65%', left: '36%', rot: -5 },   // 13
+        { top: '78%', left: '36%', rot: 0 }     // 14
     ];
 
     galleryData.forEach((item, index) => {
@@ -106,7 +107,6 @@ function initHeartCollage() {
             this.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><rect width='80' height='80' fill='%23ccc'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='14'>Pic</text></svg>";
         };
 
-        // ดึงตำแหน่งจาก Array 14 จุดมาใช้
         let pos = (index < positions.length) ? positions[index] : {
             top: (30 + Math.random() * 30) + '%',
             left: (30 + Math.random() * 30) + '%',
@@ -129,4 +129,28 @@ function initHeartCollage() {
     
     void hbdText.offsetWidth; 
     hbdText.classList.add('show');
+
+    // --- เพิ่มระบบลาก (Drag) ให้หน้าสุดท้าย ---
+    const finalGalleryElement = document.getElementById('final-gallery');
+    if (finalGalleryElement && !hasAttachedFinalDragEvent) {
+        let isFinalDown = false;
+        let startXFinal;
+        let scrollLeftFinal;
+
+        finalGalleryElement.addEventListener('mousedown', (e) => {
+            isFinalDown = true;
+            startXFinal = e.pageX - finalGalleryElement.offsetLeft;
+            scrollLeftFinal = finalGalleryElement.scrollLeft;
+        });
+        finalGalleryElement.addEventListener('mouseleave', () => { isFinalDown = false; });
+        finalGalleryElement.addEventListener('mouseup', () => { isFinalDown = false; });
+        finalGalleryElement.addEventListener('mousemove', (e) => {
+            if (!isFinalDown) return;
+            e.preventDefault();
+            const x = e.pageX - finalGalleryElement.offsetLeft;
+            const walk = (x - startXFinal) * 2; 
+            finalGalleryElement.scrollLeft = scrollLeftFinal - walk;
+        });
+        hasAttachedFinalDragEvent = true;
+    }
 }

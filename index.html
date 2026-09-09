@@ -8,49 +8,14 @@
   </head>
   <body>
     <div class="app-container">
-      <!-- ของตกแต่งพื้นหลังธีมทะเล (จะแสดงในทุกหน้า) -->
+      <!-- ของตกแต่งพื้นหลังธีมทะเล -->
       <div class="sea-decorations">
-        <div
-          class="decor"
-          style="top: 10%; left: 10%; animation-delay: 0s; font-size: 30px"
-        >
-          🪼
-        </div>
-        <div
-          class="decor"
-          style="top: 15%; right: 15%; animation-delay: 1s; font-size: 24px"
-        >
-          🐚
-        </div>
-        <div
-          class="decor"
-          style="bottom: 15%; left: 20%; animation-delay: 2s; font-size: 26px"
-        >
-          🐠
-        </div>
-        <div
-          class="decor"
-          style="
-            bottom: 30%;
-            right: 10%;
-            animation-delay: 0.5s;
-            font-size: 32px;
-          "
-        >
-          🪼
-        </div>
-        <div
-          class="decor"
-          style="top: 45%; left: 5%; animation-delay: 1.5s; font-size: 20px"
-        >
-          🫧
-        </div>
-        <div
-          class="decor"
-          style="top: 55%; right: 8%; animation-delay: 2.5s; font-size: 22px"
-        >
-          🫧
-        </div>
+        <div class="decor" style="top: 10%; left: 10%; animation-delay: 0s; font-size: 30px">🪼</div>
+        <div class="decor" style="top: 15%; right: 15%; animation-delay: 1s; font-size: 24px">🐚</div>
+        <div class="decor" style="bottom: 15%; left: 20%; animation-delay: 2s; font-size: 26px">🐠</div>
+        <div class="decor" style="bottom: 30%; right: 10%; animation-delay: 0.5s; font-size: 32px">🪼</div>
+        <div class="decor" style="top: 45%; left: 5%; animation-delay: 1.5s; font-size: 20px">🫧</div>
+        <div class="decor" style="top: 55%; right: 8%; animation-delay: 2.5s; font-size: 22px">🫧</div>
       </div>
 
       <!-- หน้าแรก: ตั๋วเข้างาน -->
@@ -83,22 +48,36 @@
         </div>
       </div>
 
-      <!-- หน้าที่สาม: รวมรูปหัวใจ -->
+      <!-- หน้าที่สาม: รวมรูปหัวใจ และ คำอวยพร -->
       <div id="page3" class="page">
-        <div class="heart-collage" id="heart-collage">
-          <!-- รูปจะถูกจัดเรียงด้วย JavaScript -->
-        </div>
-        <div class="hbd-text" id="hbd-text">
-          ขอให้เธอมีความสุขมากๆ ยิ้มเยอะๆ เค้าขอให้ทุกวันเป็นวันที่ดี
-          ขอให้พรทุกข้อที่เธอขอเป็นจริงเสมอเลยนะะ เค้าอยากอยู่กับเธอไปนานๆเลย
-          ขอให้ชายคนนี้ได้รับหัวใจดวงน้อยไปดูแลนะคับ
-          <br />
-          Happy Birthday<br />to<br />YOU
+        <div class="gallery-container" id="final-gallery">
+          
+          <!-- ส่วนที่ 1: หน้าหัวใจ (ปัดได้) -->
+          <div class="gallery-item" style="justify-content: center;">
+            <div class="heart-collage" id="heart-collage">
+              <!-- รูปจะถูกจัดเรียงด้วย JavaScript -->
+            </div>
+            <div class="hbd-text" id="hbd-text" style="margin-top: -20px;">
+              Happy Birthday<br />to<br />YOU
+            </div>
+            <div class="swipe-hint" style="bottom: 30px;">swipe 👉</div>
+          </div>
+
+          <!-- ส่วนที่ 2: หน้าคำอวยพร -->
+          <div class="gallery-item">
+            <div class="message-box">
+              ขอให้เธอมีความสุขมากๆ ยิ้มเยอะๆ เค้าขอให้ทุกวันเป็นวันที่ดี<br><br>
+              ขอให้พรทุกข้อที่เธอขอเป็นจริงเสมอเลยนะะ เค้าอยากอยู่กับเธอไปนานๆเลย<br><br>
+              ขอให้ชายคนนี้ได้รับหัวใจดวงน้อยไปดูแลนะคับ 🩵
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- เรียกใช้ไฟล์ js ทั้ง 2 ตัว -->
     <script src="data.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>

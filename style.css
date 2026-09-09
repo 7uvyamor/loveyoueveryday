@@ -40,8 +40,8 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none; /* ห้ามให้บังการคลิก */
-  z-index: 0; /* ให้อยู่ชั้นล่างสุด */
+  pointer-events: none;
+  z-index: 0; 
 }
 
 .decor {
@@ -51,12 +51,8 @@ body {
 }
 
 @keyframes floatDecor {
-  0% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  100% {
-    transform: translateY(-15px) rotate(10deg);
-  }
+  0% { transform: translateY(0px) rotate(0deg); }
+  100% { transform: translateY(-15px) rotate(10deg); }
 }
 
 .page {
@@ -76,7 +72,7 @@ body {
 .page.active {
   opacity: 1;
   pointer-events: auto;
-  z-index: 10; /* เนื้อหาของหน้าต้องอยู่เหนือของตกแต่งเสมอ */
+  z-index: 10; 
 }
 
 /* --- Page 1: Ticket Page --- */
@@ -129,39 +125,11 @@ body {
 }
 
 .ticket-left {
-  clip-path: polygon(
-    0 0,
-    50% 0,
-    48% 10%,
-    52% 20%,
-    48% 30%,
-    52% 40%,
-    48% 50%,
-    52% 60%,
-    48% 70%,
-    52% 80%,
-    48% 90%,
-    50% 100%,
-    0 100%
-  );
+  clip-path: polygon(0 0, 50% 0, 48% 10%, 52% 20%, 48% 30%, 52% 40%, 48% 50%, 52% 60%, 48% 70%, 52% 80%, 48% 90%, 50% 100%, 0 100%);
 }
 
 .ticket-right {
-  clip-path: polygon(
-    50% 0,
-    100% 0,
-    100% 100%,
-    50% 100%,
-    48% 90%,
-    52% 80%,
-    48% 70%,
-    52% 60%,
-    48% 50%,
-    52% 40%,
-    48% 30%,
-    52% 20%,
-    48% 10%
-  );
+  clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%, 48% 90%, 52% 80%, 48% 70%, 52% 60%, 48% 50%, 52% 40%, 48% 30%, 52% 20%, 48% 10%);
 }
 
 .ticket-inner {
@@ -204,7 +172,7 @@ body {
   opacity: 0;
 }
 
-/* --- Page 2: Museum Gallery --- */
+/* --- Page 2 & 3: Museum Gallery Container --- */
 .gallery-container {
   width: 100%;
   height: 100%;
@@ -240,14 +208,8 @@ body {
 }
 
 @keyframes fadeUp {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
 .gallery-item .img-box,
@@ -270,7 +232,7 @@ body {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   pointer-events: none;
   border-radius: 15px; /* เพิ่มขอบมนที่นี่ */
-  overflow: hidden; /* เพื่อให้รูปภาพด้านในถูกตัดตามขอบมน */
+  overflow: hidden; 
 }
 
 .img-box img {
@@ -297,13 +259,8 @@ body {
 }
 
 @keyframes bounceRight {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(5px);
-  }
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(5px); }
 }
 
 .finish-btn {
@@ -317,9 +274,7 @@ body {
   margin-top: 20px;
   opacity: 0;
   animation: fadeUp 0.6s ease 0.5s forwards;
-  transition:
-    background-color 0.3s,
-    transform 0.2s;
+  transition: background-color 0.3s, transform 0.2s;
   pointer-events: auto;
 }
 .finish-btn:hover {
@@ -327,13 +282,7 @@ body {
   transform: scale(1.05);
 }
 
-/* --- Page 3: All Pic & Heart --- */
-#page3 {
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-}
-
+/* --- Page 3: Heart Collage --- */
 .heart-collage {
   width: 300px;
   height: 300px;
@@ -343,14 +292,8 @@ body {
 }
 
 @keyframes dropIn {
-  0% {
-    transform: translateY(-50px) scale(0.5) rotate(var(--rot));
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0) scale(1) rotate(var(--rot));
-    opacity: 1;
-  }
+  0% { transform: translateY(-50px) scale(0.5) rotate(var(--rot)); opacity: 0; }
+  100% { transform: translateY(0) scale(1) rotate(var(--rot)); opacity: 1; }
 }
 
 .collage-img {
@@ -376,4 +319,18 @@ body {
 
 .hbd-text.show {
   animation: fadeUp 0.8s ease forwards;
+}
+
+/* ตกแต่งสำหรับกล่องคำอวยพรหน้าสุดท้าย */
+.message-box {
+  background: rgba(255, 255, 255, 0.85);
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-color);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  width: 85%;
+  max-width: 320px;
 }
